@@ -12,6 +12,8 @@ const router = express.Router();
 // Get Current User
 router.get("/me", authMiddleware, async (req, res) => {
     try {
+        console.log("Checking user from token:", req.user); // ✅ Debugging log
+
         const user = await User.findById(req.user.id).select("-password"); // Exclude password
         if (!user) {
             return res.status(404).json({ msg: "User not found" });
