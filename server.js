@@ -12,7 +12,14 @@ require('dotenv').config();
 const app = express();
 
 // Middleware
-app.use(cors());
+
+const allowedOrigins = [
+    "https://adhayayan-frontend.vercel.app", // Your Vercel frontend
+    "http://localhost:3000", // For local development
+];
+
+app.use(cors({ origin: allowedOrigins, credentials: true }));
+
 app.use(express.json());
 
 // Connect to MongoDB
